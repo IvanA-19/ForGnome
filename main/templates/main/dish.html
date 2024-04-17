@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}{{dish}}{% endblock %}
+
+{% block page_header %}
+
+    <h1 style="text-align: center; font-size: 40pt; color: indigo;">Блюдо</h1>
+
+{% endblock %}
+
+{% block content %}
+
+    <h2>{{dish}}</h2>
+    <h3>{{dish.price}}₽</h3>
+
+    <form id="MyForm" action="" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" button_class="btn btn-danger btn-lg" content="В корзину" %}
+    </form>
+
+{% endblock %}

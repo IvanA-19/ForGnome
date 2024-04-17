@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}Cart{% endblock %}
+
+{% block page_header %}
+    <h1 style="color: indigo;">Корзина</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="cart">
+        <ul class="MyUl">
+            {% for pos in order %}
+                <li>
+                    {{pos}}
+                    <p>Количество: {{pos.count}}</p>
+                    <p>
+                        <a href="{% url 'main:edit' pos.id %}" class="btn btn-alert btn-primary"
+                        style="font-size: 14pt;">Редактировать</a>
+                    </p>
+                </li>
+            {% empty %}
+                <li>
+                    <h2>Ваша корзина пуста. Оформите свой заказ!</h2>
+                    <a href="{% url 'main:restaurants' %}" class="btn btn-alert btn-primary">Оформить заказ</a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% if final_price %}
+            <p style="color: darkgreen;"><strong>Сумма заказа: {{ final_price }}₽</strong></p>
+            <form action="" method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% bootstrap_button button_type="submit" button_class="btn btn-success btn-lg" content="Оформить заказ" %}
+            </form>
+        {% endif %}
+    </div>
+
+    <style>
+        .MyUl{
+            list-style-type: none;
+        }
+        .cart{
+            font-size: 16pt;
+            color: darkmagenta;
+            font-weight: 500;
+        }
+    </style>
+{% endblock %}

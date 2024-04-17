@@ -1,0 +1,70 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=devise-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/CSS/main.css' %}">
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+        <a class="navbar-brand" href="{% url 'main:index' %}" style="font-size: 20pt">
+            <img src="{% static 'main/images/logo/img-transformed.png' %}" alt="logo" width="50px" height="50px" >
+            Главная</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-expanded="false" aria-label="Toggle navigation" aria-controls="navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse" style="font-size: 14pt">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main:restaurants' %}">Рестораны
+                    <img src="{% static 'main/images/cart/restaurant.png' %}" alt="cart"
+                        width="25px" height="25px"></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main:cart' %}">Корзина
+                        <img src="{% static 'main/images/cart/cart.png' %}" alt="cart"
+                        width="25px" height="25px"></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
+                    <span class="navbar-text"><strong>Здравствуйте, {{ user.username }}!</strong></span>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:logout' %}">Выйти</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:register' %} " >Регистрация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:login' %}">Войти</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <main role="main" class="container">
+        <div class="pb-2 mb-2 border-bottom">
+            {% block page_header %}{% endblock %}
+        </div>
+        <div>
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+<!--    <script>-->
+<!--        let form = document.getElementById('MyForm');-->
+
+<!--        alert(form.querySelector('[count="count"]'))-->
+
+<!--    </script>-->
+</body>
+</html>

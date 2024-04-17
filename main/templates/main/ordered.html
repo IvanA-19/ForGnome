@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Заказ офрмлен{% endblock %}
+
+{% block page_header %}
+    <h1 style="text-align: center; color: indigo; font-family: 'Segoe Print';"><strong>Заказ оформлен</strong></h1>
+{% endblock %}
+{% block content %}
+    <div style="text-align: center">
+        <h2 style="color: darkblue; font-weight: 600; font-family: 'Segoe Print';">Спасибо за заказ! Ожидайте.</h2><br>
+        <a href="{% url 'main:index' %}" class="btn btn-success" style="font-size: 40pt;
+        font-family: 'Segoe Print';"><strong>На главную</strong>
+        <p><img src="{% static 'main/images/cart/img_1.png' %}" alt="kaban"></p></a>
+    </div>
+{% endblock %}

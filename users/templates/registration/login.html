@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+{% load django_bootstrap5 %}
+
+
+{% block title %}Авторизация{% endblock %}
+
+{% block page_header %}
+    <h2>Авторизация</h2>
+{% endblock %}
+
+{% block content %}
+    <form class="form" action="{% url 'users:login' %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="Войти" %}
+
+
+        <input type="hidden" name="next" value="{% url 'main:index' %}" />
+    </form>
+{% endblock %}

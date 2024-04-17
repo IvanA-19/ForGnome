@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Рестораны{% endblock %}
+
+{% block page_header %}
+    <h1 style="text-align: center; font-size: 40pt; color: indigo;">Рестораны</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="restaurants">
+        <ul>
+            {% for restaurant in restaurants %}
+                <li>
+                    <h2>
+                        <a href="{% url 'main:restaurant' restaurant.id %}" title="{{restaurant}}"
+                        style="color: forestgreen;">
+                            <p>{{restaurant}}</p>
+                            <img src="{% static restaurant.img %}" alt="{{restaurant}}">
+
+                        </a>
+                    </h2>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <style>
+        ul{
+            list-style-type: none;
+        }
+        .restaurants{
+            text-align: center;
+        }
+    </style>
+
+
+{% endblock %}

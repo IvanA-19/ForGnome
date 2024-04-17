@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}Редактирование{% endblock %}
+
+{% block page_header %}
+    <h1 style="color: indigo;">
+        Редактировать позицию
+    </h1>
+
+{% endblock %}
+
+{% block content %}
+    <h3>{{position}}</h3>
+    <div style="font-size: 14pt;">
+        <p>Для удаления позиции из корзины - введите 0 в поле количество</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% bootstrap_button button_type="submit" button_class="btn btn-success" content="Сохранить" %}
+        </form>
+    </div>
+{% endblock %}

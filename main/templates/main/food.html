@@ -1,0 +1,46 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}{{restaurant}} еда{% endblock %}
+
+{% block page_header %}<h1 style="text-align: center; font-size: 30pt; color: indigo;">
+    <a href="{% url 'main:restaurant' restaurant.id %}"
+    style="color: indigo;">{{restaurant}}</a><br><br>Доступные блюда</h1>{% endblock %}
+
+{% block content %}
+    <div id="div_top_hypers">
+        <ul id="ul_top_hypers">
+            {% for pos in food %}
+                <li>
+                    <a href="{% url 'main:dish' restaurant.id pos.id %}" title="{{pos}}">
+                        <img src="{% static pos.img %}" alt="{{pos}}">
+                    </a>
+                </li>
+            {% empty %}
+                <li>
+                    <h3>
+                        Пока что нет блюд, доступных для заказа!
+                    </h3>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <style>
+        #div_top_hypers {
+        display:inline;
+    }
+
+    #ul_top_hypers li{
+        margin-right: 100px;
+        display: inline;
+    }
+    #ul_top_hypers li img{
+        width: 310px;
+        height: 550px;
+
+    }
+    </style>
+
+
+{% endblock %}
